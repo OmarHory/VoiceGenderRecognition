@@ -1,0 +1,11 @@
+tensorflow==2.3
+numpy
+pandas
+matplotlib
+scikit-learn
+praat-parselmouth
+joblib
+librosa
+werkzeug
+scikit-image
+keras-tuner
