@@ -7,9 +7,10 @@ import os
 
 ALLOWED_EXTENSIONS = {'flac', 'wav'} #lossless formats/extensions.
 MODELS_PATH = './models'
-dataPath_test = "./Test-cases" # Path of train speakers folders.
+dataPath_test = "./temp" # Path of train speakers folders.
 delimeter = '/' 
 path_praat = './myspsolution.praat' # Path to .praat file.
+
 
 # The initiation of the flask app.
 app= Flask(__name__)
@@ -46,6 +47,8 @@ def upload_file():
             return jsonify({'output' : 'Please select a file.', 'success' : False}), 422 #Message with status code.
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            if not os.path.isdir(dataPath_test):
+                os.mkdir(dataPath_test)
             file.save(os.path.join(dataPath_test + delimeter, filename))
             print('File uploaded successfully.')
             pred, predcnn = test_prediction(file.filename)
@@ -63,34 +66,29 @@ def upload_file():
             
             print('\nML:', predml,'\nNN:', prednn, '\nCNN:', predcnn, '\n')
             
-            count_of_m = 0
-            count_of_f = 0
-            
-            if 'Audio has not been recognized.' == prednn:
+            if prednn == 'Audio has not been recognized.':
                 return jsonify({'output' : 'Audio has not been recognized.', 'success': True}), 200
+            count_of_m=0
+            count_of_f=0
             
-            
-            if prednn == 'Male':
-                count_of_m+=1
-            else:
-                count_of_f+=1
-            if predml == 'Male':
-                count_of_m+=1
-            else:
-                count_of_f+=1
-            if predcnn =='Male':
-                count_of_m+=1
-            else:
-                count_of_f+=1
+            count_of_m, count_of_f = count_predection(prednn, count_of_m, count_of_f)
+            count_of_m, count_of_f = count_predection(predml, count_of_m, count_of_f)
+            count_of_m, count_of_f = count_predection(predcnn, count_of_m, count_of_f)
             
             # I called the keys as 'output' and 'success' so the API does not expose any information about the models.
             return jsonify({'output' : 'Male' if count_of_m > count_of_f else 'Female','success': True}), 200
         else:
             print('File extension is not allowed, use .flac or .wav')
             return jsonify({'output' : 'File extension is not allowed, use .flac or .wav', 'success' : False}), 422
-            
-            
-            
+        
+
+def count_predection(predection, count_of_m, count_of_f):
+    if predection == "Male":
+       count_of_m+=1
+    if predection == "Female":
+       count_of_f+=1
+    return count_of_m, count_of_f
+       
 def test_prediction(filename):
     return t.model_preds_nn(modelNN,modelML, dataPath_test, filename, path_praat), t.model_preds_cnn(modelCNN, dataPath_test, filename)
             
