@@ -1,4 +1,4 @@
-# Voice Gender Detection
+# Voice Gender Recognition
 
 [![N|Solid](https://hackernoon.com/hn-images/1*ChocH_eUxil5eaeXIsd3rw.png)](https://nodesource.com/products/nsolid)
 # Why speech?
