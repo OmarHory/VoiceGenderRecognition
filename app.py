@@ -38,7 +38,7 @@ def upload_file():
             return jsonify({'output' : 'Please select a file.', 'success' : False}), 422 #Message with status code.
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            if !os.path.isdir(dataPath_test):
+            if not os.path.isdir(dataPath_test):
                 os.mkdir(dataPath_test)
             file.save(os.path.join(dataPath_test + delimeter, filename))
             print('File uploaded successfully.')
