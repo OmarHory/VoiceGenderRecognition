@@ -25,8 +25,8 @@ This dataset is solely audio files with '.flac' formats. When you open the direc
 # Instructions
 The order of notebooks to run is as follows (to prevent any path conflicts):
 - web-scraper-speech
-- exploratory_data_analysis
 - feature_extraction_nn_ml
+- exploratory_data_analysis
 - model_nn_and_ml
 - cnn_modeling_and_feature_extraction
 
