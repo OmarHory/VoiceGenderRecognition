@@ -24,11 +24,11 @@ This dataset is solely audio files with '.flac' formats. When you open the direc
 
 # Instructions
 The order of notebooks to run is as follows (to prevent any path conflicts):
-1- web-scraper-speech
-2- exploratory_data_analysis
-3- feature_extraction_nn_ml
-4- model_nn_and_ml
-5- cnn_modeling_and_feature_extraction
+- web-scraper-speech
+- exploratory_data_analysis
+- feature_extraction_nn_ml
+- model_nn_and_ml
+- cnn_modeling_and_feature_extraction
 
 Running such project like this one requires some guidelines in order to work with convenience.
 The structure of the files is as the order of this github repository.
