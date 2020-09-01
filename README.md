@@ -160,7 +160,7 @@ You can run the Flask API on your local machine and use *Postman* or *Advanced R
 *There are two API's that are included in the repository, one with the best generated model and the other one is based on a voting-behavior system, that takes into account the majority of decisions.*
 
 The procedure of the prediction for the **best-generated-model** (CNN) goes as follows:
-- Upload a .flac or .wav audio-file to the server, it gets saved in _./Data/Test-cases_.
+- Upload a .flac or .wav audio-file to the server, it gets saved in _./Data/temp_.
 - Feature Extraction for CNN.
 - Delete audio-file and spectrogram to retain space.
 - Predict.
@@ -168,7 +168,7 @@ The procedure of the prediction for the **best-generated-model** (CNN) goes as f
 The procedure of the prediction for the **voting-behavior** from the best model of ANN, CNN and ML, then return the prediction with the most votes (Note: ANN and ML only can predict the unrecognizability of the audio-file, that is due to the *.praat* file from parselmouth, which is not available for CNN as it is only concerned with images.
 
 The process of predicting the gender goes as follows:
-- Upload a .flac or .wav audio-file to the server, it gets saved in _./Data/Test-cases_.
+- Upload a .flac or .wav audio-file to the server, it gets saved in _./Data/temp_.
 - Feature extraction whether for CNN or ANN.
 - Delete audio-file and spectrogram to retain space.
 - Predict.
