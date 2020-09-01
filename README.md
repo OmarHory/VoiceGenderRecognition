@@ -182,7 +182,7 @@ Personally, I do prefer the first version which is the **best-generated-model**,
 
 ## Future Work
 For further inspection, I would love to try out different methodologies like:
-- Another approach would be to use **Low-pass filter** to do noise-reduction; especially the background noise, that would be done before the pre-processing step, then on test-time; we can pass those audio files to the Low-pass filter before feeding it to the model.
+- Another approach would be to use **Low-pass filter** to do noise-reduction; especially the background noise, that would be done before the pre-processing step, then on test-time; we can pass those audio files to the Low-pass filter before feeding them to the model.
 - A possible approach is to create a separate model on a different dataset; then blending the models altogether which will result in a more efficient Gender Classifier that handles many possible set of circumstances.
 - Train models on the 500 hour version and to observe where the model architecture is compared to the other ones.
 - Do feature extraction in a different method, try out different combinations to improve the generalization of the models.
