@@ -23,11 +23,13 @@ This dataset is solely audio files with '.flac' formats. When you open the direc
 - [Test-set Download link ](http://www.openslr.org/resources/12/test-clean.tar.gz)
 
 # Instructions
-First thing first is to create the following directories in the following paths:
-	`os.mkdir('./Data')`
-    `os.mkdir('./Data/CNN-data')`
-    `os.mkdir('./Data/NN_ML-data')`
-   Then run the Web-scraper script to download the dataset into your ./Data directory.
+The order of notebooks to run is as follows (to prevent any path conflicts):
+1- web-scraper-speech
+2- exploratory_data_analysis
+3- feature_extraction_nn_ml
+4- model_nn_and_ml
+5- cnn_modeling_and_feature_extraction
+
 Running such project like this one requires some guidelines in order to work with convenience.
 The structure of the files is as the order of this github repository.
 The structure is extremely essential in order to run the notebooks in an efficient way without interruptions or path issues.
@@ -149,7 +151,7 @@ _**NOTE: Training the models was done on Colab-Pro as Google offers a great runt
 	- Demonstrate a comparison in terms of Accuracy on the test-set.
 
 ## Deploy
-This project will be served as a Restful API with a docker image to be tested on for your convenience.
+This project will be served as a Restful API with a docker-file to build to be tested on for your convenience.
 Flask is used to allow testing for your own voice; keeping in mind that the available audio-file-extensions are: **'flac** and **.wav**; that is due to the lossless nature of those extensions; especially the .wav; it is *LINEAR16*  or LINEAR PCM; which is an example of uncompressed audio in that the digital data is stored exactly as the standards imply.
 You can run the Flask API on your local machine and use *Postman* or *Advanced Restful Client* on Google Chrome App or any other Restful client that you prefer to test your voice on those models.
 
@@ -162,6 +164,7 @@ The procedure of the prediction for the **best-generated-model** (CNN) goes as f
 - Predict.
 
 The procedure of the prediction for the **voting-behavior** from the best model of ANN, CNN and ML, then return the prediction with the most votes (Note: ANN and ML only can predict the unrecognizability of the audio-file, that is due to the *.praat* file from parselmouth, which is not available for CNN as it is only concerned with images.
+
 The process of predicting the gender goes as follows:
 - Upload a .flac or .wav audio-file to the server, it gets saved in _./Data/Test-cases_.
 - Feature extraction whether for CNN or ANN.
@@ -169,10 +172,11 @@ The process of predicting the gender goes as follows:
 - Predict.
 - Most votes is the determined final prediction.
 
-Personally, I do prefer the first version which i **best-generated-model**, because this eliminates confusion there are mainly three reasons for this:
+Personally, I do prefer the first version which is the **best-generated-model**, because this eliminates confusion between models there are mainly three reasons for this:
 - CNN is the only model that uses images as features while ANN and ML use the same numeric features, so they will be biased toward each other when it comes to learning and predicting.
 - There is a feature of ANN and ML model is that it can detect *unnatural sounds* and that is not available in CNN for the reason that we do not have a third label that identifies *'Unrecognized voice'* but in ANN and ML this feature is doable through feature extraction by using parselmouth library with the .praat file (yet it needs improvements in this regard).
 - CNN can generalize more because there is no a 'clear' feature extraction, what we actually do is to extract a spectrogram image and can obtain features through the CNN Architecture. Also, CNN offers the availability of *Image Augmentation* which can increase the generalization of the model; as I have noticed this on multiple voices that I have personally recorded with noise and bad microphone quality yet it still recognizes the gender.
+- ANN has gotten used to the train and validation data regarding reading from a textbook. ANN sometimes misinterpret the reader if the reader is: singing, speaking fast or young/very old in age.
 
 ## Future Work
 For further inspection, I would love to try out different methodologies like:

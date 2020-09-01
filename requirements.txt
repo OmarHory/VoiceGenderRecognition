@@ -5,6 +5,7 @@ matplotlib
 scikit-learn
 praat-parselmouth
 joblib
+soundfile
 librosa
 werkzeug
 scikit-image
