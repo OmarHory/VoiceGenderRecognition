@@ -34,11 +34,13 @@ Running such project like this one requires some guidelines in order to work wit
 The structure of the files is as the order of this github repository.
 The structure is extremely essential in order to run the notebooks in an efficient way without interruptions or path issues.
 There are two options to run the project:
-- **Google Colab**
+- **Google Colab**:
+
 	If you use Google Colab, usually most Google Drive paths start with the following: **/content/drive/My Drive**
 	If that is the case for you; add another folder inside called 'Google Colab' (With spaces). That is because I have done that on my local machine while training the DL/ML models; I recommend you do the same set of paths because everything is automated in the notebook; it already recognizes whether you are on Google Colab or on  Local Machine and will allocate the right paths for you. 
 	_If you wish to have your own paths, feel free to change them; as I have left comments on each path to know exactly where that belongs._
-- **Local Machine**
+- **Local Machine**:
+
 	This one is the easiest and most convenient; every path is relative to the executed piece of code. I would suggest **Extracting the features** on your local machine; and running the models on Google Colab.
 
 You will need the following libraries:
@@ -66,20 +68,20 @@ In this notebook, a direct crawler is being used to pull both Training-set and T
 ## Pre-processing
 _**NOTE: The pre-processing has been run on a local machine. If you do not want to run into path issues, follow the structure of this repository for the path structure in order to eliminate such issues.**_
 -  **Walk-through your directory to your audio-files** *('.flac')*
-        - That is done through the input of the **dataPath** in _dataset_creation_ function interacting with your current directory. 
-        - Look for **.flac** audio files and assign them as inputs to _extract_features_ to retrieve features from this audio file. The features that were used are _MFCCs_, _Intensity (chroma)_, _mel-scaled_ _spectrogram_, _Spectral Contrast, tonnetz_. Also use the use of **parselmouth** library on python; it parses the audio file and uses a **.praat** file in order to extract other features like the #of syllables in a speaking period, speaking time, articulation, count of pauses, mean-frequency, min-frequency, max-frequency.
-        - Add the features to your DataFrame or Dataset.
-        - Extract the gender (target-label) of the audio file and add it to another DataFrame with the use of **SPEAKER.TXT**.
-        - Join both DataFrames that result in the full dataset after you pass through all audio-files.
-        - Output the Dataset as a **.csv**.
-        - Save the features vector and pickle it.
+    - That is done through the input of the **dataPath** in _dataset_creation_ function interacting with your current directory. 
+     - Look for **.flac** audio files and assign them as inputs to _extract_features_ to retrieve features from this audio file. The features that were used are _MFCCs_, _Intensity (chroma)_, _mel-scaled_ _spectrogram_, _Spectral Contrast, tonnetz_. Also use the use of **parselmouth** library on python; it parses the audio file and uses a **.praat** file in order to extract other features like the #of syllables in a speaking period, speaking time, articulation, count of pauses, mean-frequency, min-frequency, max-frequency.
+    - Add the features to your DataFrame or Dataset.
+     - Extract the gender (target-label) of the audio file and add it to another DataFrame with the use of **SPEAKER.TXT**.
+      - Join both DataFrames that result in the full dataset after you pass through all audio-files.
+      - Output the Dataset as a **.csv**.
+      - Save the features vector and pickle it.
 - **Load features vector.**
-			- Shuffle training and test-set, the previous pre-processing step had the speakers lined up with respect to their audio-file.
-            - Split to X and Y for both the training-set and Test-set.
-            - **(Optional):** Use StratifiedKFold on training-set to ensure the data is balanced I didn't use it on my training-set because I do not need a test-set that is from the same distribution as my training-set, not the type of problem that requires this.
-            - Create a _dev/cross-validation set_ from the _test-set_ because both of these sets must be from the same distribution and different from the _training-set._
-            - One-hot-encode the labels to be able to use it in the softmax activation function in the output neuron rather than having a restricted '0' or '1'; to have a conditional probability instead.
-            - Use standardization on the feature vector to have a zero-mean with a standard deviation.
+	- Shuffle training and test-set, the previous pre-processing step had the speakers lined up with respect to their audio-file.
+     - Split to X and Y for both the training-set and Test-set.
+     - **(Optional):** Use StratifiedKFold on training-set to ensure the data is balanced I didn't use it on my training-set because I do not need a test-set that is from the same distribution as my training-set, not the type of problem that requires this.
+     - Create a _dev/cross-validation set_ from the _test-set_ because both of these sets must be from the same distribution and different from the _training-set._
+      - One-hot-encode the labels to be able to use it in the softmax activation function in the output neuron rather than having a restricted '0' or '1'; to have a conditional probability instead.
+      - Use standardization on the feature vector to have a zero-mean with a standard deviation.
 ## Exploratory Data Analysis (EDA)
 In this section, an EDA is performed to perceive the various types of features that are handled during the Machine learning/ DL model. it has gone through a diverse collection of features that are extracted once the audio-file is passed to the _extract_feature_ function. Those features are:
 -   MFCCs
@@ -120,19 +122,19 @@ The reason behind that depends solely on the nature of the data, the visualizati
 ## Modeling
 _**NOTE: Training the models was done on Colab-Pro as Google offers a great runtime-environment with a GPU & TPU to use for an affordable price.**_
 - **Artificial Neural Network:**
-        - Baseline Neural Network
-        - Improved Neural Network
-        - Hyper-parameter tuned deep Neural Network model
+     - Baseline Neural Network
+     - Improved Neural Network
+     - Hyper-parameter tuned deep Neural Network model
  - **Convolutional Neural Network:**
-        - Baseline Convolutional Neural Network
-        - Improved Convolutional Neural Network
-        - Hyper-parameter tuned deep Convolutional  Neural Network 
+     - Baseline Convolutional Neural Network
+     - Improved Convolutional Neural Network
+     - Hyper-parameter tuned deep Convolutional  Neural Network 
  - **Machine Learning Models:**
-		 - Logistic Regression
-		 - KNN
-		 - Stochastic Gradient Descent
-		 - Random Forest
-		 - XGBOOST
+	 - Logistic Regression
+	 - KNN
+	- Stochastic Gradient Descent
+	- Random Forest
+	- XGBOOST
 
 ## Hyper-parameter tuning
 - **Artificial Neural Network:**
@@ -195,16 +197,10 @@ P.S.: If you record your voice and get mis-recognized in an opposite manner, I e
 Do not hesitate to contact me at anytime on my personal email if you have any inquires or advice that would have an impact on this repository : o_hawary@hotmail.com ._
 
 ## Useful Research Papers & Articles
-1- [The Difference Between a Male and Female Voice Over](https://matinee.co.uk/blog/difference-male-female-voice/)
-
-2- [Voice Gender Recognition Using Deep Learning](https://www.researchgate.net/publication/312219824_Voice_Gender_Recognition_Using_Deep_Learning)
-
-3- [Neural architectures for gender detection and speaker identification ](https://www.tandfonline.com/doi/full/10.1080/23311916.2020.1727168)
-
-4- [Automatic Identification of Gender from Speech](http://www.cs.columbia.edu/~sarahita/papers/speech_prosody16.pdf)
-
-5- [VOICE-BASED GENDER IDENTIFICATION IN MULTIMEDIA APPLICATIONS](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.143.7087&rep=rep1&type=pdf)
-
-6- [Gender Identification by Voice](http://cs229.stanford.edu/proj2014/Kunyu%20Chen,%20Gender%20Identification%20by%20Voice.pdf) 
-
-7- [Voice Gender Recognition Using Deep Learning](https://download.atlantis-press.com/article/25868884.pdf) 
+- [The Difference Between a Male and Female Voice Over](https://matinee.co.uk/blog/difference-male-female-voice/)
+- [Voice Gender Recognition Using Deep Learning](https://www.researchgate.net/publication/312219824_Voice_Gender_Recognition_Using_Deep_Learning)
+- [Neural architectures for gender detection and speaker identification ](https://www.tandfonline.com/doi/full/10.1080/23311916.2020.1727168)
+- [Automatic Identification of Gender from Speech](http://www.cs.columbia.edu/~sarahita/papers/speech_prosody16.pdf)
+- [VOICE-BASED GENDER IDENTIFICATION IN MULTIMEDIA APPLICATIONS](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.143.7087&rep=rep1&type=pdf)
+- [Gender Identification by Voice](http://cs229.stanford.edu/proj2014/Kunyu%20Chen,%20Gender%20Identification%20by%20Voice.pdf) 
+- [Voice Gender Recognition Using Deep Learning](https://download.atlantis-press.com/article/25868884.pdf) 
