@@ -175,7 +175,7 @@ The process of predicting the gender goes as follows:
 - Predict.
 - Most votes is the determined final prediction.
 
-Personally, I do prefer the first version which is the **best-generated-model**, because this eliminates confusion between models there are mainly three reasons for this:
+Personally, I do prefer the first version which is the **best-generated-model**. This eliminates confusion between models, there are mainly four reasons for this:
 - CNN is the only model that uses images as features while ANN and ML use the same numeric features, so they will be biased toward each other when it comes to learning and predicting.
 - There is a feature of ANN and ML model is that it can detect *unnatural sounds* and that is not available in CNN for the reason that we do not have a third label that identifies *'Unrecognized voice'* but in ANN and ML this feature is doable through feature extraction by using parselmouth library with the .praat file (yet it needs improvements in this regard).
 - CNN can generalize more because there is no a 'clear' feature extraction, what we actually do is to extract a spectrogram image and can obtain features through the CNN Architecture. Also, CNN offers the availability of *Image Augmentation* which can increase the generalization of the model; as I have noticed this on multiple voices that I have personally recorded with noise and bad microphone quality yet it still recognizes the gender.
