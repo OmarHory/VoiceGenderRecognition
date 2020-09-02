@@ -1,3 +1,4 @@
+
 # Voice Gender Recognition
 
 [![N|Solid](https://hackernoon.com/hn-images/1*ChocH_eUxil5eaeXIsd3rw.png)](https://nodesource.com/products/nsolid)
@@ -73,17 +74,17 @@ _**NOTE: The pre-processing has been run on a local machine. If you do not want 
     - Add the features to your DataFrame or Dataset.
      - Extract the gender (target-label) of the audio file and add it to another DataFrame with the use of **SPEAKER.TXT**.
       - Join both DataFrames that result in the full dataset after you pass through all audio-files.
-      - Output the Dataset as a **.csv**.
+      - Output the dataset as a **.csv**.
       - Save the features vector and pickle it.
 - **Load features vector.**
 	- Shuffle training and test-set, the previous pre-processing step had the speakers lined up with respect to their audio-file.
      - Split to X and Y for both the training-set and Test-set.
-     - **(Optional):** Use StratifiedKFold on training-set to ensure the data is balanced I didn't use it on my training-set because I do not need a test-set that is from the same distribution as my training-set, not the type of problem that requires this.
+     - **(Optional):** Use StratifiedKFold on training-set to ensure the data is balanced. I didn't use it on my training-set because I do not need a test-set that is from the same distribution as my training-set, not the type of problem that requires this.
      - Create a _dev/cross-validation set_ from the _test-set_ because both of these sets must be from the same distribution and different from the _training-set._
-      - One-hot-encode the labels to be able to use it in the softmax activation function in the output neuron rather than having a restricted '0' or '1'; to have a conditional probability instead.
-      - Use standardization on the feature vector to have a zero-mean with a standard deviation.
+    - One-hot-encode the labels to be able to use it in the softmax activation function in the output neuron rather than having a restricted '0' or '1'; to have a conditional probability instead.
+    - Use standardization on the feature vector to have a zero-mean with a standard deviation.
 ## Exploratory Data Analysis (EDA)
-In this section, an EDA is performed to perceive the various types of features that are handled during the Machine learning/ DL model. it has gone through a diverse collection of features that are extracted once the audio-file is passed to the _extract_feature_ function. Those features are:
+In this section, an EDA is performed to perceive the various types of features that are handled during the Machine learning/ Deep Learning model. It has gone through a diverse collection of features that are extracted once the audio-file is passed to the _extract_feature_ function. Those features are:
 -   MFCCs
 -   Chroma (intensity)
 -   mel-scaled spectrogram
@@ -99,14 +100,14 @@ In this section, an EDA is performed to perceive the various types of features t
 -   Minimum frequency
 -   Maximum frequency
 
-The above features are helpful in nature to visualize their properties and get a glimpse of the behavior of this data. EDA is needed the most in the Speech Recognition field, because the features are so 'dependent', removing one feature or adding an 'unnecessary' feature might outcome unwanted results. Being extremely selective with the features is mandatory.
+The above features are helpful in nature to visualize their properties and get a glimpse of the behavior of this data. EDA is needed the most in the Speech Recognition field, because the features are so 'dependent', removing one feature or adding an 'unnecessary' feature might outcome unwanted results. Being extremely selective with the features is mandatory to ensure validity between different models.
 Intuitively, there are features that are not useful when it comes to modeling; such as: 
 - Audio Duration
 - \# of syllables
 - Speaking Time
 - Count of pauses with fillers.
 
-The reason behind that is those features if they are given to you for example, you will not be able to specify whether the speaker is a male of female.
+The reason behind that is those features; if they are given to you for example, you will not be able to specify whether the speaker is a male of female.
 _In summary_, the above features are made for visualization, to understand how your data is centered in a certain distribution.
 The rest of the features are selected with an approach, but the final features selected for modeling were the following:
 
@@ -117,7 +118,7 @@ The rest of the features are selected with an approach, but the final features s
 -   Tonnetz
 -  Mean Frequency
 
-The reason behind that depends solely on the nature of the data, the visualizations that are available in the notebook do explain this to detail.
+The reason behind that depends solely on the nature of the data, the visualizations that are available in the notebook do explain this in details.
 
 ## Modeling
 _**NOTE: Training the models was done on Colab-Pro as Google offers a great runtime-environment with a GPU & TPU to use for an affordable price.**_
@@ -140,17 +141,17 @@ _**NOTE: Training the models was done on Colab-Pro as Google offers a great runt
 - **Artificial Neural Network:**
 	- Create a baseline model to compare its loss and accuracy to other models.
 	- Create an improved model upon the baseline and compare its accuracy and loss.
-	- Use Keras Tuner with the same number of parameters as the improved model with different range of values to Brute force and return the best model.
+	- Use Keras Tuner with the same number of parameters as the improved model with different range of values to random-search with a given number of trials and return the best model.
 - **Convolutional Neural Network**
 	- Create a baseline model to compare its loss and accuracy to the improved model.
 	- Create an improved model upon the baseline and demonstrate its accuracy.
-	- Use Keras Tuner with the some different parameters and ranges to Brute force and return the best model.
-- **ML models:**
-	As any Machine learning model, keeping the parameters on default might get the job done, since Machine learning models are way simpler than NN; we will perform a Bruteforce/ GridSearch on some models.
-	- Run GridSearchCV from sklearn on Logistic Regression, SGD, return the best set of parameters and fit again to plot necessary visualizations.
-	- For KNN, we will perform a simple K-Value optimizer to find the best K-Value for the model; afterwards, we will fit the model again.
-	- In terms for the RF and XGBOOST, their GridSearch is extremely computationally expensive and even on Google Colab it was taking 10+ hours.
-	- Demonstrate a comparison in terms of Accuracy on the test-set.
+	- Use Keras Tuner with the some different parameters and ranges to random-search and return the best model.
+- **Machine Learning Models:**
+	As any ML model, keeping the parameters on default **might** get the job done, since Machine learning models are way simpler than NN; we will perform a Bruteforce/ GridSearch on some models.
+	- Run GridSearchCV from sciket-learn on Logistic Regression, SGD, then return the best set of parameters and fit again to plot necessary visualizations.
+	- For KNN, we will perform a simple K-Value optimizer to find the best K-Value for the model. Afterwards, we will fit the model again to plot necessary visualization of accuracy metrics.
+	- In terms for the Random Forest and XGBOOST, their GridSearch is extremely computationally expensive and even on Google Colab it was taking 10+ hours, selectively choosing the parameters would do the job.
+	- Demonstrate a comparison in terms of Accuracy on the test-set and the Area under Curve (AUC).
 
 ## Deploy
 This project will be served as a Restful API with a docker-file to build to be tested on for your convenience.
