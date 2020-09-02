@@ -191,7 +191,7 @@ For further inspection, I would love to try out different methodologies like:
 
 ## Last words
 _As the first Voice-recognition challenge, I am quite satisfied with all the stuff that I have learned in voice and signal processing, I have a lot in mind. Consequently, I will keep improving on this repository in terms of modeling and feature selection that I truly conceive that the former needs some tweaking.
-I do genuinely believe that this project has a potential to become big; if not my biggest project of all time. I really want to thank Google Corroboratory for this flexible environment, I've been using it for a year now and I have never complained.
+I do genuinely believe that this project has a potential to become big; if not my biggest project of all time. I really want to thank Google Colaboratory for this flexible environment, I've been using it for a year now and I have never complained.
 Also I would like to thank OPENSLR for this fulfilling dataset, also with the availability to edit and share anywhere on the web [License](https://creativecommons.org/licenses/by/4.0/).
 Thanks for reading if you have reached until this final piece, my pleasure.
 P.S.: If you record your voice and get mis-recognized in an opposite manner, I extremely apologize :D. If that happens, please, I would love your input for improving the generalization of the models.
